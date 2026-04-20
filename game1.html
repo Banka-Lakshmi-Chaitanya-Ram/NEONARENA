@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neon Arena - Superman vs Demon 1v1</title>
+    <link rel="stylesheet" href="css/game1.css">
+</head>
+<body>
+
+    <div id="ui-p1">
+        <h1>SUPERMAN</h1>
+        <h2>HEALTH: <span id="health-p1">100</span></h2>
+        <p>MOVE: WASD | SHOOT: SPACE</p>
+    </div>
+
+    <div id="ui-p2">
+        <h1>DEMON</h1>
+        <h2>HEALTH: <span id="health-p2">100</span></h2>
+        <p>MOVE: ARROWS | SHOOT: ENTER</p>
+    </div>
+
+    <div id="gameOverScreen">
+        <h1 id="winnerText">PLAYER WINS!</h1>
+        <button onclick="location.reload()">REMATCH</button>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <script src="js/game1.js"></script>
+</body>
+</html>

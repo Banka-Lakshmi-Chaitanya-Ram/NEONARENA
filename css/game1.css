@@ -1,0 +1,61 @@
+body { 
+    margin: 0; 
+    overflow: hidden; 
+    background-color: #0b0b1a; 
+    font-family: 'Courier New', Courier, monospace; 
+    user-select: none; 
+}
+
+/* UI Styling for 2 Players */
+#ui-p1 { 
+    position: absolute; 
+    top: 20px; 
+    left: 20px; 
+    color: #00ffcc; 
+    text-shadow: 0 0 10px #00ffcc; 
+    pointer-events: none; 
+}
+#ui-p2 { 
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    color: #ff4d4d; 
+    text-shadow: 0 0 10px #ff4d4d; 
+    pointer-events: none; 
+    text-align: right; 
+}
+
+h1 { margin: 0; font-size: 35px; }
+h2 { margin: 5px 0; color: white; font-size: 20px;}
+p { margin: 0; font-size: 14px; opacity: 0.8; }
+
+#gameOverScreen { 
+    display: none; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    text-align: center; 
+    color: white; 
+    z-index: 100;
+}
+#gameOverScreen h1 { 
+    font-size: 60px; 
+    margin-bottom: 10px; 
+    text-shadow: 0 0 20px #fff; 
+}
+button { 
+    margin-top: 20px; 
+    padding: 15px 30px; 
+    font-size: 20px; 
+    font-weight: bold;
+    background: transparent; 
+    color: white; 
+    border: 2px solid white; 
+    cursor: pointer; 
+    transition: 0.3s;
+}
+button:hover { 
+    background: white; 
+    color: black; 
+}

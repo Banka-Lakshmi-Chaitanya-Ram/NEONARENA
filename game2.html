@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neon Arena - Superman vs Demons</title>
+    <link rel="stylesheet" href="css/game2.css">
+</head>
+<body>
+
+    <div id="ui">
+        <h1>SCORE: <span id="score">0</span></h1>
+        <h2>ENEMY: <span id="health">100</span></h2> 
+        <h2>TIME: <span id="time">0</span>s</h2>
+
+        <!-- HEALTH BAR -->
+        <div id="healthBarContainer">
+            <div id="healthBar"></div>
+        </div>
+    </div>
+
+    <div id="gameOverScreen">
+        <h1>GAME OVER</h1>
+        <h2>Final Score: <span id="finalScore">0</span></h2>
+        <h2>Time Survived: <span id="finalTime">0</span>s</h2>
+        <button onclick="location.reload()">PLAY AGAIN</button>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <script src="js/game2.js"></script>
+</body>
+</html>

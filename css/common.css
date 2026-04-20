@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #0b0b1a;
+    font-family: monospace;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    cursor: pointer;
+}
