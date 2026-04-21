@@ -9,7 +9,7 @@
 
     <div id="ui">
         <h1>SCORE: <span id="score">0</span></h1>
-        <h2>ENEMY: <span id="health">100</span></h2> 
+        <h2>Ship Health: <span id="health">100</span></h2> 
         <h2>TIME: <span id="time">0</span>s</h2>
 
         <!-- HEALTH BAR -->
@@ -25,7 +25,44 @@
         <button onclick="location.reload()">PLAY AGAIN</button>
     </div>
 
+    <!-- START SCREEN -->
+    <div id="startScreen">
+        <h1>yoooo hehe 😁😜</h1>
+        <p id="instructionsText"></p>
+
+        <button onclick="startGame()">START GAME</button>
+        <button onclick="goHome()">BACK</button>
+
+        <!-- ✅ NEW BUTTON -->
+        <button onclick="showControls()">HOW TO PLAY</button>
+    </div>
+
+    <!-- PAUSE SCREEN -->
+    <div id="pauseScreen">
+        <h1>PAUSED</h1>
+        <button onclick="resumeGame()">RESUME</button>
+        <button onclick="restartGame()">RESTART</button>
+        <button onclick="goHome()">HOME</button>
+    </div>
+
     <canvas id="gameCanvas"></canvas>
+
+    <!-- ✅ CONTROLS POPUP -->
+    <div id="controlsModal" class="modal">
+        <div class="modal-content">
+            <h2>HOW TO PLAY</h2>
+
+            <p>
+            🎮 MOVE: W A S D<br><br>
+            🎯 AIM: Mouse<br><br>
+            🔫 SHOOT: Left Click<br><br>
+            ❤️ Collect health packs<br><br>
+            ⚠️ Survive as long as possible
+            </p>
+
+            <button onclick="closeControls()">CLOSE</button>
+        </div>
+    </div>
 
     <script src="js/game2.js"></script>
 </body>

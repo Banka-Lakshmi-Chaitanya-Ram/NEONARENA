@@ -1,15 +1,135 @@
 body {
     margin: 0;
     overflow: hidden;
-    background: #0b0b1a;
-    font-family: monospace;
+    background: radial-gradient(circle at center, #0b0b1a 0%, #050510 100%);
+    font-family: 'Courier New', monospace;
+    color: white;
 }
 
+/* --- CENTER LAYOUT --- */
+.center {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    flex-direction:column;
+    text-align:center;
+    position: relative;
+}
+
+/* --- TITLE --- */
+.title {
+    font-size: 64px;
+    letter-spacing: 4px;
+    color: #00ffcc;
+    text-shadow: 
+        0 0 10px #00ffcc,
+        0 0 20px #00ffcc,
+        0 0 40px #00ffcc;
+    animation: glowPulse 2.5s infinite;
+}
+
+/* subtle glow animation */
+@keyframes glowPulse {
+    0% { text-shadow: 0 0 10px #00ffcc; }
+    50% { text-shadow: 0 0 30px #00ffcc, 0 0 60px #00ffcc; }
+    100% { text-shadow: 0 0 10px #00ffcc; }
+}
+
+/* --- WARNING TEXT --- */
+.warning {
+    margin: 20px;
+    font-size: 14px;
+    color: #ffcc00;
+    opacity: 0.8;
+    letter-spacing: 1px;
+}
+
+/* --- MENU --- */
+.menu {
+    margin-top: 30px;
+    display: flex;
+    gap: 25px;              /* space between buttons */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;       /* keeps it responsive */
+}
+
+.menu button {
+    min-width: 260px;
+}
+
+/* --- BUTTON BASE --- */
 button {
-    padding: 10px 20px;
-    margin-top: 10px;
+    padding: 14px 32px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: bold;
     background: transparent;
-    border: 2px solid white;
-    color: white;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
     cursor: pointer;
+    transition: all 0.25s ease;
+    text-shadow: 0 0 5px #00ffcc;
+    box-shadow: 0 0 10px #00ffcc inset;
+    border-radius: 6px;
+    letter-spacing: 1px;
+}
+
+/* hover effect */
+button:hover {
+    background: #00ffcc;
+    color: black;
+    transform: scale(1.08);
+    box-shadow: 
+        0 0 20px #00ffcc,
+        0 0 40px #00ffcc;
+}
+
+/* active click */
+button:active {
+    transform: scale(0.95);
+}
+
+/* --- BACKGROUND GRID EFFECT --- */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- FADE IN ANIMATION --- */
+.center {
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tagline {
+    font-size: 16px;
+    margin-top: 10px;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+.btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.desc {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-top: 5px;
 }

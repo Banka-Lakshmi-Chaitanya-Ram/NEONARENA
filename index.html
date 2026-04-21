@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Neon Arena</title>
-    <link rel="stylesheet" href="css/common.css">
+<meta charset="UTF-8">
+<title>Neon Arena</title>
+<link rel="stylesheet" href="css/common.css">
 </head>
-<body style="display:flex;justify-content:center;align-items:center;height:100vh;flex-direction:column;">
 
-    <h1 style="color:#00ffcc;">NEON ARENA</h1>
+<body class="center">
 
-    <button onclick="location.href='game1.html'">2 PLAYER MODE</button>
-    <button onclick="location.href='game2.html'">SHOOTER MODE</button>
+    <!-- Title -->
+    <h1 class="title">NEON ARENA</h1>
+
+    <!-- Subtitle -->
+    <p class="tagline">Enter the arena. Survive or dominate.</p>
+
+    <!-- Warning -->
+    <p class="warning">
+        ⚠️ Best experienced on PC / Laptop <br>
+        Keyboard + Mouse required
+    </p>
+
+    <!-- Menu -->
+    <div class="menu">
+
+        <button onclick="goToGame('game1')" class="btn duel">
+            ⚔️ 2 PLAYER DUEL
+            <span class="desc">Battle your friend in real-time</span>
+        </button>
+
+        <button onclick="goToGame('game2')" class="btn survival">
+            🔥 SURVIVAL MODE
+            <span class="desc">Fight endless enemies. Stay alive.</span>
+        </button>
+
+    </div>
+
+<script>
+function goToGame(game){
+    window.location.href = game + ".html";
+}
+</script>
 
 </body>
 </html>

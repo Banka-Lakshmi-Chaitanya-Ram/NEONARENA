@@ -1,73 +1,283 @@
 body { 
     margin: 0; 
     overflow: hidden; 
-    background-color: #0b0b1a; 
-    font-family: 'Courier New', Courier, monospace; 
+    background: radial-gradient(circle at center, #0b0b1a 0%, #000000 100%);
+    font-family: 'Courier New', monospace; 
     user-select: none; 
+    color: white;
 }
 
+/* --- HUD (TOP LEFT) --- */
 #ui { 
     position: absolute; 
     top: 20px; 
     left: 20px; 
-    color: white; 
-    text-shadow: 0 0 10px #fff; 
-    pointer-events: none; 
+    z-index: 10;
 }
 
-h1 { margin: 0; font-size: 30px; }
+#ui h1 {
+    margin: 0;
+    font-size: 30px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+}
 
-h2 { 
-    margin: 5px 0; 
+#ui h2 { 
+    margin: 6px 0; 
+    font-size: 18px;
     color: #ff4d4d; 
-    text-shadow: 0 0 10px #ff4d4d; 
+    text-shadow: 0 0 10px #ff0000, 0 0 25px #ff0000;
 }
 
-#gameOverScreen { 
-    display: none; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    text-align: center; 
-    color: white; 
-}
-
-#gameOverScreen h1 { 
-    font-size: 60px; 
-    color: #ff4d4d; 
-    margin-bottom: 10px; 
-}
-
-button { 
-    margin-top: 20px; 
-    padding: 15px 30px; 
-    font-size: 20px; 
-    font-weight: bold;
-    background: transparent; 
-    color: #00ffcc; 
-    border: 2px solid #00ffcc; 
-    cursor: pointer; 
-    text-shadow: 0 0 5px #00ffcc; 
-    box-shadow: 0 0 10px #00ffcc inset;
-}
-
-button:hover { 
-    background: #00ffcc; 
-    color: #000; 
-}
-
+/* --- HEALTH BAR --- */
 #healthBarContainer {
-    width: 200px;
-    height: 15px;
-    background: #333;
-    margin-top: 5px;
-    border: 1px solid #fff;
+    width: 230px;
+    height: 16px;
+    margin-top: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 #healthBar {
     height: 100%;
     width: 100%;
+    background: linear-gradient(90deg, #00ffcc, #00ffaa);
+    box-shadow: 0 0 12px #00ffcc;
+    transition: width 0.2s ease;
+}
+
+/* 🔥 LOW HEALTH MODE */
+.low-health {
+    background: linear-gradient(90deg, #ff0000, #ff4d4d) !important;
+    box-shadow: 0 0 20px red !important;
+    animation: dangerPulse 0.5s infinite;
+}
+
+@keyframes dangerPulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* --- GAME OVER --- */
+#gameOverScreen { 
+    display: none; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%) scale(0.9); 
+    text-align: center; 
+    z-index: 100;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+#gameOverScreen h1 { 
+    font-size: 70px; 
+    color: #ff4d4d; 
+    margin-bottom: 10px; 
+    text-shadow: 0 0 20px #ff0000, 0 0 50px #ff0000;
+}
+
+#gameOverScreen p {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+/* --- BUTTON --- */
+button { 
+    margin-top: 15px; 
+    padding: 12px 28px; 
+    font-size: 18px; 
+    font-weight: bold;
+    background: transparent; 
+    color: #00ffcc; 
+    border: 2px solid #00ffcc; 
+    cursor: pointer; 
+    border-radius: 6px;
+    text-shadow: 0 0 5px #00ffcc;
+    box-shadow: 0 0 10px #00ffcc inset;
+    transition: 0.3s;
+}
+
+button:hover { 
+    background: #00ffcc; 
+    color: black; 
+    box-shadow: 0 0 25px #00ffcc, 0 0 50px #00ffcc;
+    transform: scale(1.08);
+}
+
+/* --- START / PAUSE --- */
+#startScreen, #pauseScreen {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    text-align:center;
+    color:white;
+    background:rgba(0,0,0,0.85);
+    padding:40px;
+    border-radius:15px;
+    z-index:999;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(255,0,0,0.2);
+    animation: fadeIn 0.4s ease;
+}
+
+#pauseScreen {
+    display:none;
+}
+
+/* --- FADE IN --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -60%) scale(0.85); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* --- BACKGROUND GRID --- */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(rgba(255,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,0,0,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+/* --- INTENSITY GLOW --- */
+body::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255,0,0,0.08), transparent);
+    pointer-events: none;
+}
+
+.modal {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.85);
+    z-index: 2000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #000;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    width: 350px;
+
+    box-shadow: 0 0 30px #00ffcc;
+    border: 1px solid #00ffcc;
+
+    animation: popIn 0.3s ease;
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+.modal-content p {
+    margin: 8px 0;
+    opacity: 0.9;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* MODAL BACKGROUND */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* MODAL BOX */
+.modal-content {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 35px 40px;
+    border-radius: 15px;
+    text-align: center;
+
+    border: 2px solid #00ffcc;
+    box-shadow: 
+        0 0 20px #00ffcc,
+        0 0 60px rgba(0,255,204,0.4);
+
+    animation: popIn 0.3s ease;
+}
+
+/* TITLE */
+.modal-content h2 {
+    color: #00ffcc;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+/* TEXT */
+.modal-content p {
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* BUTTON */
+.modal-content button {
+    padding: 12px 25px;
+    font-size: 16px;
+    background: transparent;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
+    cursor: pointer;
+
+    box-shadow: 0 0 10px #00ffcc inset;
+    transition: 0.3s;
+}
+
+.modal-content button:hover {
     background: #00ffcc;
-    transition: 0.2s;
+    color: black;
+}
+
+/* ANIMATION */
+@keyframes popIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }

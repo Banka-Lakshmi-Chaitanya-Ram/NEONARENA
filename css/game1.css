@@ -1,61 +1,271 @@
 body { 
     margin: 0; 
     overflow: hidden; 
-    background-color: #0b0b1a; 
+    background: radial-gradient(circle at center, #0b0b1a 0%, #050510 100%);
     font-family: 'Courier New', Courier, monospace; 
     user-select: none; 
 }
 
-/* UI Styling for 2 Players */
-#ui-p1 { 
+/* --- PLAYER UI --- */
+#ui-p1, #ui-p2 { 
     position: absolute; 
     top: 20px; 
+    pointer-events: none; 
+    z-index: 10;
+}
+
+#ui-p1 { 
     left: 20px; 
     color: #00ffcc; 
-    text-shadow: 0 0 10px #00ffcc; 
-    pointer-events: none; 
+    text-shadow: 0 0 8px #00ffcc, 0 0 20px #00ffcc;
 }
+
 #ui-p2 { 
-    position: absolute; 
-    top: 20px; 
     right: 20px; 
     color: #ff4d4d; 
-    text-shadow: 0 0 10px #ff4d4d; 
-    pointer-events: none; 
+    text-shadow: 0 0 8px #ff4d4d, 0 0 20px #ff4d4d;
     text-align: right; 
 }
 
-h1 { margin: 0; font-size: 35px; }
-h2 { margin: 5px 0; color: white; font-size: 20px;}
-p { margin: 0; font-size: 14px; opacity: 0.8; }
+/* Glow pulse animation */
+@keyframes pulseGlow {
+    0% { text-shadow: 0 0 5px currentColor; }
+    50% { text-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+    100% { text-shadow: 0 0 5px currentColor; }
+}
 
+#ui-p1 h1, #ui-p2 h1 {
+    animation: pulseGlow 2s infinite;
+}
+
+/* --- TEXT --- */
+h1 { 
+    margin: 0; 
+    font-size: 34px; 
+    letter-spacing: 2px;
+}
+
+h2 { 
+    margin: 6px 0; 
+    color: white; 
+    font-size: 18px;
+}
+
+p { 
+    margin: 0; 
+    font-size: 13px; 
+    opacity: 0.7; 
+}
+
+/* --- GAME OVER SCREEN --- */
 #gameOverScreen { 
     display: none; 
     position: absolute; 
     top: 50%; 
     left: 50%; 
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%) scale(0.9); 
     text-align: center; 
     color: white; 
     z-index: 100;
+    animation: fadeIn 0.5s ease forwards;
 }
+
 #gameOverScreen h1 { 
-    font-size: 60px; 
-    margin-bottom: 10px; 
-    text-shadow: 0 0 20px #fff; 
+    font-size: 70px; 
+    margin-bottom: 15px; 
+    text-shadow: 0 0 20px #fff, 0 0 40px #fff;
 }
+
+/* --- SCREENS (START / PAUSE) --- */
+#startScreen, #pauseScreen {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    text-align:center;
+    color:white;
+    background:rgba(0,0,0,0.85);
+    padding:40px;
+    border-radius:15px;
+    z-index:999;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0,255,255,0.2);
+    animation: fadeIn 0.4s ease;
+}
+
+#pauseScreen {
+    display:none;
+}
+
+/* --- BUTTONS --- */
 button { 
-    margin-top: 20px; 
-    padding: 15px 30px; 
-    font-size: 20px; 
+    margin-top: 15px; 
+    padding: 12px 28px; 
+    font-size: 18px; 
     font-weight: bold;
     background: transparent; 
-    color: white; 
-    border: 2px solid white; 
+    color: #00ffcc; 
+    border: 2px solid #00ffcc; 
     cursor: pointer; 
     transition: 0.3s;
+    text-shadow: 0 0 5px #00ffcc;
+    box-shadow: 0 0 10px #00ffcc inset;
+    border-radius: 6px;
 }
+
 button:hover { 
-    background: white; 
+    background: #00ffcc; 
     color: black; 
+    box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc;
+    transform: scale(1.08);
+}
+
+/* --- DEMON STYLE BUTTON --- */
+#ui-p2 button {
+    color: #ff4d4d;
+    border-color: #ff4d4d;
+}
+
+/* --- SCREEN FADE ANIMATION --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -60%) scale(0.85); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* --- SUBTLE BACKGROUND GRID (PRO TOUCH) --- */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.modal {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.85);
+    z-index: 2000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #000;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    width: 350px;
+
+    box-shadow: 0 0 30px #00ffcc;
+    border: 1px solid #00ffcc;
+
+    animation: popIn 0.3s ease;
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+.modal-content p {
+    margin: 8px 0;
+    opacity: 0.9;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* MODAL BACKGROUND */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* MODAL BOX */
+.modal-content {
+    background: rgba(0, 0, 0, 0.85);
+    padding: 35px 40px;
+    border-radius: 15px;
+    text-align: center;
+
+    border: 2px solid #00ffcc;
+    box-shadow: 
+        0 0 20px #00ffcc,
+        0 0 60px rgba(0,255,204,0.4);
+
+    animation: popIn 0.3s ease;
+}
+
+/* TITLE */
+.modal-content h2 {
+    color: #00ffcc;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+/* TEXT */
+.modal-content p {
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* BUTTON */
+.modal-content button {
+    padding: 12px 25px;
+    font-size: 16px;
+    background: transparent;
+    border: 2px solid #00ffcc;
+    color: #00ffcc;
+    cursor: pointer;
+
+    box-shadow: 0 0 10px #00ffcc inset;
+    transition: 0.3s;
+}
+
+.modal-content button:hover {
+    background: #00ffcc;
+    color: black;
+}
+
+/* ANIMATION */
+@keyframes popIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
